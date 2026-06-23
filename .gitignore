@@ -1,0 +1,25 @@
+# 排除大文件
+*.npy
+*.zip
+*.pkl
+
+# 排除数据目录内容（保留目录结构）
+data/*.npy
+features/*.npy
+results/*.csv
+figures/*.png
+predictions/*.npy
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# 临时文件
+*.tmp
+*.log
