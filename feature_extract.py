@@ -234,7 +234,7 @@ def main():
         print(f"\n  提取 {split_name} 特征 ({len(indices)} 张图像)...")
         features_list = []
         for i in tqdm(indices, desc=f"  {split_name}"):
-            img = np.array(merged[i]["image"])
+            img = np.array(merged[int(i)]["image"])  # 将 numpy.int64 转为 Python int
             feat = extract_all_features(img)
             features_list.append(feat)
         features = np.array(features_list, dtype=np.float32)
