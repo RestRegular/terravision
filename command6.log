@@ -1,0 +1,201 @@
+============================================================
+步骤 1: 解压各成员交付的zip文件
+============================================================
+解压 W-stage2-to-R.zip...
+Archive:  W-stage2-to-R.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+unzip:  cannot find zipfile directory in one of W-stage2-to-R.zip or
+        W-stage2-to-R.zip.zip, and cannot find W-stage2-to-R.zip.ZIP, period.
+解压 W-stage3-supplement-to-R.zip...
+Archive:  W-stage3-supplement-to-R.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+unzip:  cannot find zipfile directory in one of W-stage3-supplement-to-R.zip or
+        W-stage3-supplement-to-R.zip.zip, and cannot find W-stage3-supplement-to-R.zip.ZIP, period.
+解压 L-stage2-to-R.zip...
+Archive:  L-stage2-to-R.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+unzip:  cannot find zipfile directory in one of L-stage2-to-R.zip or
+        L-stage2-to-R.zip.zip, and cannot find L-stage2-to-R.zip.ZIP, period.
+解压 L-stage2.zip...
+Archive:  L-stage2.zip
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+unzip:  cannot find zipfile directory in one of L-stage2.zip or
+        L-stage2.zip.zip, and cannot find L-stage2.zip.ZIP, period.
+
+============================================================
+步骤 2: 检查文件结构
+============================================================
+features/ 目录:
+total 241792
+drwxr-xr-x 2 root root      4096 Jun 23 14:04 .
+drwxr-xr-x 9 root root      4096 Jun 23 15:37 ..
+-rw-r--r-- 1 root root  23263328 Jun 23 14:00 features_raw_test.npy
+-rw-r--r-- 1 root root 186105728 Jun 23 14:00 features_raw_train.npy
+-rw-r--r-- 1 root root  23263328 Jun 23 14:00 features_raw_val.npy
+-rw-r--r-- 1 root root   1382528 Jun 23 14:04 features_test.npy
+-rw-r--r-- 1 root root  11059328 Jun 23 14:04 features_train.npy
+-rw-r--r-- 1 root root   1382528 Jun 23 14:04 features_val.npy
+-rw-r--r-- 1 root root   1113780 Jun 23 14:04 pca_model.pkl
+-rw-r--r-- 1 root root       193 Jun 23 14:04 reduce_info.json
+
+predictions/ 目录:
+total 8
+drwxr-xr-x 2 root root 4096 Jun 23 13:46 .
+drwxr-xr-x 9 root root 4096 Jun 23 15:37 ..
+
+results/ 目录:
+total 8
+drwxr-xr-x 2 root root 4096 Jun 23 13:46 .
+drwxr-xr-x 9 root root 4096 Jun 23 15:37 ..
+
+data/ 目录:
+total 688
+drwxr-xr-x 2 root root   4096 Jun 23 13:54 .
+drwxr-xr-x 9 root root   4096 Jun 23 15:37 ..
+-rw-r--r-- 1 root root  21728 Jun 23 13:54 indices_test.npy
+-rw-r--r-- 1 root root 172928 Jun 23 13:54 indices_train.npy
+-rw-r--r-- 1 root root  21728 Jun 23 13:54 indices_val.npy
+-rw-r--r-- 1 root root   1515 Jun 23 13:54 label_info.json
+-rw-r--r-- 1 root root  46028 Jun 23 13:54 labels_test.npy
+-rw-r--r-- 1 root root 367328 Jun 23 13:54 labels_train.npy
+-rw-r--r-- 1 root root  46028 Jun 23 13:54 labels_val.npy
+
+============================================================
+步骤 3: 运行早融合实验
+============================================================
+R 角色 - 阶段三：早融合实验
+项目根目录: /mnt/workspace/terravision
+随机种子: 42
+
+============================================================
+步骤 1: 加载特征矩阵
+============================================================
+Traceback (most recent call last):
+  File "/mnt/workspace/terravision/fusion/fusion_early.py", line 192, in <module>
+    main()
+  File "/mnt/workspace/terravision/fusion/fusion_early.py", line 87, in main
+    resnet_train = np.load(FEATURES_DIR / "resnet_features_train.npy")
+  File "/usr/local/lib/python3.10/dist-packages/numpy/lib/npyio.py", line 405, in load
+    fid = stack.enter_context(open(os_fspath(file), "rb"))
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/workspace/terravision/features/resnet_features_train.npy'
+
+============================================================
+步骤 4: 运行晚融合实验
+============================================================
+R 角色 - 阶段三：晚融合实验
+项目根目录: /mnt/workspace/terravision
+随机种子: 42
+
+============================================================
+步骤 1: 加载测试集标签
+============================================================
+  标签 shape: (2700, 17)
+
+============================================================
+步骤 2: 加载各模型预测概率
+============================================================
+  SVM            : predictions_svm_test.npy ✗ [缺失]
+  RandomForest   : predictions_rf_test.npy ✗ [缺失]
+  XGBoost        : predictions_xgb_test.npy ✗ [缺失]
+  CNN            : predictions_cnn_test.npy ✗ [缺失]
+  ResNet50       : predictions_resnet_test.npy ✗ [缺失]
+
+  [警告] 缺失 5 个模型的预测概率文件:
+    - SVM
+    - RandomForest
+    - XGBoost
+    - CNN
+    - ResNet50
+
+  请通知 L 和 W 补充交付物（参见 补充交付物说明.md）
+
+  [错误] 没有任何预测概率文件，无法进行晚融合
+  请等待 L 和 W 补充交付物后再运行此脚本
+
+============================================================
+步骤 5: 汇总所有模型结果
+============================================================
+R 角色 - 阶段三：汇总所有模型结果
+项目根目录: /mnt/workspace/terravision
+
+============================================================
+步骤 1: 读取各结果文件
+============================================================
+  [警告] 未找到 ml_results.csv
+  [警告] 未找到 dl_results.csv
+  [警告] 未找到 fusion_early_results.csv
+  [警告] 未找到 fusion_late_results.csv
+
+============================================================
+步骤 2: 合并结果
+============================================================
+  [错误] 没有找到任何结果文件
+
+============================================================
+步骤 6: 查看最终结果
+============================================================
+all_results.csv 内容:
+cat: results/all_results.csv: No such file or directory
+
+============================================================
+步骤 7: 生成阶段三交付物压缩包
+============================================================
+生成 R-stage3-to-H.zip...
+	zip warning: name not matched: results/all_results.csv
+	zip warning: name not matched: results/fusion_early_results.csv
+	zip warning: name not matched: results/fusion_late_results.csv
+	zip warning: name not matched: results/model_weights.json
+	zip warning: name not matched: features/early_fusion_train.npy
+	zip warning: name not matched: features/early_fusion_test.npy
+
+zip error: Nothing to do! (try: zip -r R-stage3-to-H.zip . -i results/all_results.csv results/fusion_early_results.csv results/fusion_late_results.csv results/model_weights.json features/early_fusion_train.npy features/early_fusion_test.npy)
+
+生成 R-stage3.zip（全员分发）...
+	zip warning: name not matched: results/all_results.csv
+	zip warning: name not matched: results/fusion_early_results.csv
+	zip warning: name not matched: results/fusion_late_results.csv
+	zip warning: name not matched: results/model_weights.json
+	zip warning: name not matched: features/early_fusion_train.npy
+	zip warning: name not matched: features/early_fusion_test.npy
+updating: figures/tsne_features.png (deflated 2%)
+
+============================================================
+步骤 8: 交付物压缩包列表
+============================================================
+-rw-r--r-- 1 root root 713K Jun 23 15:50 R-stage3.zip
+
+压缩包内容预览:
+
+--- R-stage3-to-H.zip ---
+unzip:  cannot find or open R-stage3-to-H.zip, R-stage3-to-H.zip.zip or R-stage3-to-H.zip.ZIP.
+
+--- R-stage3.zip ---
+Archive:  R-stage3.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+   744936  2026-06-23 14:04   figures/tsne_features.png
+---------                     -------
+   744936                     1 file
+
+============================================================
+✓ 阶段三完成！
+============================================================
+
+============================================================
+步骤 9: 推送结果到远程仓库
+============================================================
+fatal: pathspec 'results/*.csv' did not match any files
+fatal: pathspec 'results/*.json' did not match any files
+fatal: pathspec 'features/early_fusion_*.npy' did not match any files
