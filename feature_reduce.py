@@ -120,15 +120,27 @@ def main():
     print(f"  t-SNE 输入: {test_pca.shape}")
     print(f"  开始 t-SNE 计算（可能需要几分钟）...")
 
-    # t-SNE 参数
-    tsne = TSNE(
-        n_components=2,
-        perplexity=30,
-        learning_rate=200,
-        max_iter=1000,
-        random_state=RANDOM_STATE,
-        verbose=1,
-    )
+    # t-SNE 参数（兼容不同 sklearn 版本）
+    try:
+        # 新版本 sklearn 使用 max_iter
+        tsne = TSNE(
+            n_components=2,
+            perplexity=30,
+            learning_rate=200,
+            max_iter=1000,
+            random_state=RANDOM_STATE,
+            verbose=1,
+        )
+    except TypeError:
+        # 旧版本 sklearn 使用 n_iter
+        tsne = TSNE(
+            n_components=2,
+            perplexity=30,
+            learning_rate=200,
+            n_iter=1000,
+            random_state=RANDOM_STATE,
+            verbose=1,
+        )
     test_tsne = tsne.fit_transform(test_pca)
 
     print(f"  t-SNE 输出: {test_tsne.shape}")
